@@ -1,0 +1,27 @@
+name: blutter
+
+services:
+  blutter:
+    image: blutter:local
+    build:
+      context: .
+    stdin_open: true
+    tty: true
+    working_dir: /work
+    entrypoint:
+      - python3
+      - /app/blutter.py
+    command:
+      - --help
+    volumes:
+      - blutter-dartsdk:/app/dartsdk
+      - blutter-build:/app/build
+      - blutter-packages:/app/packages
+      - blutter-bin:/app/bin
+      - ${BLUTTER_WORKDIR:-.}:/work
+
+volumes:
+  blutter-dartsdk:
+  blutter-build:
+  blutter-packages:
+  blutter-bin:

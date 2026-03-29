@@ -1,0 +1,13 @@
+.git
+.vscode
+__pycache__/
+*.py[cod]
+bin/
+build/
+dartsdk/
+external/
+out/
+packages/
+tmp/
+*.apk
+*.ipa
