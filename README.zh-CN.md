@@ -53,6 +53,8 @@ python3 blutter.py path/to/lib/arm64-v8a out_dir
 docker build -t blutter:local .
 ```
 
+这里建议把镜像先单独 build 好，后面运行时直接走 `docker compose run --rm blutter ...`，不要把 Compose 当成构建入口。
+
 这个镜像会安装项目需要的依赖：
 
 - `python3`
@@ -93,6 +95,14 @@ docker run --rm blutter:local
 ```
 
 默认会输出命令行帮助。
+
+如果你要走 Compose 工作流，也可以直接这样跑：
+
+```powershell
+docker compose run --rm blutter
+```
+
+前提是 `blutter:local` 这个镜像已经通过前面的 `docker build` 构建好。
 
 ### 5. 分析 APK
 
@@ -145,10 +155,10 @@ docker run --rm -it -v blutter-dartsdk:/app/dartsdk -v blutter-build:/app/build 
 
 这样你不需要每次都手写一长串 `-v` 参数。
 
-### 1. 先构建
+### 1. 先单独构建镜像
 
 ```powershell
-docker compose build
+docker build -t blutter:local .
 ```
 
 ### 2. 先看帮助
@@ -169,12 +179,13 @@ docker compose run --rm blutter /work/app.apk /work/out
 
 更常见的情况是 APK 不在仓库目录，而是在别的目录。此时先设置 `BLUTTER_WORKDIR`，让 Compose 把那个目录挂载到容器里的 `/work`。
 
-你也可以直接在仓库根目录创建 `.env` 文件。仓库里已经提供了 [.env.example](.env.example)，复制一份改名为 `.env` 后，把里面的路径改成你自己的目录即可。
+你也可以直接在仓库根目录创建 `.env` 文件。仓库里已经提供了 [.env.example](.env.example)，复制一份改名为 `.env` 后，把里面的路径和镜像名改成你自己的即可。
 
 例如：
 
 ```env
 BLUTTER_WORKDIR=D:/Samples/flutter-app
+BLUTTER_IMAGE=blutter:local
 ```
 
 PowerShell 示例：

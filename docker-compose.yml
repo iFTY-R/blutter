@@ -2,9 +2,7 @@ name: blutter
 
 services:
   blutter:
-    image: blutter:local
-    build:
-      context: .
+    image: ${BLUTTER_IMAGE:-blutter:local}
     stdin_open: true
     tty: true
     working_dir: /work
