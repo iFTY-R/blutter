@@ -11,6 +11,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 pyrightconfig.json
+.env
 # C/C++
 *.so
 *.dll

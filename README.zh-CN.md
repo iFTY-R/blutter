@@ -169,6 +169,14 @@ docker compose run --rm blutter /work/app.apk /work/out
 
 更常见的情况是 APK 不在仓库目录，而是在别的目录。此时先设置 `BLUTTER_WORKDIR`，让 Compose 把那个目录挂载到容器里的 `/work`。
 
+你也可以直接在仓库根目录创建 `.env` 文件。仓库里已经提供了 [.env.example](.env.example)，复制一份改名为 `.env` 后，把里面的路径改成你自己的目录即可。
+
+例如：
+
+```env
+BLUTTER_WORKDIR=D:/Samples/flutter-app
+```
+
 PowerShell 示例：
 
 ```powershell
